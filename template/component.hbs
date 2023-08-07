@@ -1,0 +1,14 @@
+import React from 'react';
+
+import styles from './{{name}}.module.css';
+
+type {{pascalCase name}}Props = {
+    /**
+     * Идентификатор для систем автоматизированного тестирования
+     */
+    'data-test-id'?: string;
+};
+
+export const {{pascalCase name}} = ({ 'data-test-id': dataTestId }: {{pascalCase name}}Props) => (
+    <div data-test-id={ dataTestId } className={ styles.root } />
+);

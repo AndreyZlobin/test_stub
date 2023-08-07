@@ -1,0 +1,10 @@
+export interface AdAuth {
+    username: string;
+    cus: string;
+    permissions: string[];
+    iat: number;
+    exp: number;
+    extSysCode: string;
+}
+
+export type UncheckedAdAuth = Partial<AdAuth> | undefined;
