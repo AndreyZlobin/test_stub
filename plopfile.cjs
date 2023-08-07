@@ -24,7 +24,7 @@ const PATHS_TO_EXAMPLES = [
 const TRANSFORM_CODE_PATHS = [
     './src/routes.tsx',
     './src/pages/WelcomePage/WelcomePage.tsx',
-    './plopfile.js',
+    './plopfile.cjs',
 ];
 
 const REPLACEMENT_FILES = [
