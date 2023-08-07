@@ -174,8 +174,8 @@ module.exports = (plop) => {
             }
         ],
         actions: ({ projectName, repositoryName, projectDescription, auth }) => {
-            const removeStubCodeActions = createCodeRemoveActions();
-            const replaceCodeActions = createCodeReplaceActions();
+            // const removeStubCodeActions = createCodeRemoveActions();
+            // const replaceCodeActions = createCodeReplaceActions();
             const updateRepositoryNameActions = createModifyActions(
                 'ui-stub-example',
                 repositoryName,
@@ -189,8 +189,8 @@ module.exports = (plop) => {
             console.log('Отлично! Запускаю настройку 🚀');
 
             return [
-                ...removeStubCodeActions,
-                ...replaceCodeActions,
+                // ...removeStubCodeActions,
+                // ...replaceCodeActions,
                 ...updateRepositoryNameActions,
                 ...updateProjectNameActions,
                 ...updateRepositoryDescriptionActions,
