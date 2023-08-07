@@ -88,7 +88,7 @@ const createModifyActions = (pattern, template) => {
     return actions;
 };
 /* endRemoveCode */
-//
+
 module.exports = (plop) => {
     const validateComponentName = (value) => {
         if (!value) return 'Не может быть пустым';
