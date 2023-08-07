@@ -16,6 +16,7 @@
     "lint-css": "stylelint ./src/**/*.css",
     "lint-scripts": "eslint ./ ./src/ ./config/ ./cypress --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "yarn lint-css --fix && yarn lint-scripts --fix",
+    "plop": "npx plop",
     "test": "arui-scripts test"
   },
   "dependencies": {
