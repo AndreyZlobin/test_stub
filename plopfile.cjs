@@ -7,12 +7,6 @@ const { execSync } = require('child_process');
 const PACKAGE_JSON_PATH = './package.json';
 
 const PATHS_TO_EXAMPLES = [
-    './src/examples',
-    './src/redux/modules/counter.ts',
-    './src/redux/modules/routing.ts',
-    './src/redux/services/example.ts',
-    './src/pages/secret-page',
-    './src/types/api/example-api.ts',
     './cypress/integration/examples',
     './cypress/snapshots',
     './src/server/mocks/example-api',

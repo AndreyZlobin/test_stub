@@ -1,0 +1,14 @@
+module.exports = {
+    "*.js": [
+        "eslint --fix",
+        "git add"
+    ],
+    "*.css": [
+        "stylelint --fix",
+        "git add"
+    ],
+    "*.json": [
+        "prettier --write",
+        "git add"
+    ],
+};

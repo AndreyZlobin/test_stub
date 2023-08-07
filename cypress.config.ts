@@ -20,6 +20,6 @@ export default defineConfig({
         setupNodeEvents(on, config) {
             addPlugins(on, config);
         },
-        baseUrl: 'http://localhost:3000',
+        // baseUrl: 'http://localhost:3000',
     },
 });
