@@ -6,15 +6,6 @@ const { execSync } = require('child_process');
 
 const PACKAGE_JSON_PATH = './package.json';
 
-const AUTH_PATHS = [
-    './config/default.ts',
-    './src/redux/modules/app.ts',
-    './src/types/services.ts',
-    './src/server/plugins/page-plugin.tsx',
-    './src/server/plugins/plugins.ts',
-    './src/server/lib/prepare-state.ts',
-];
-
 const PATHS_TO_EXAMPLES = [
     './src/examples',
     './src/redux/modules/counter.ts',
@@ -32,20 +23,13 @@ const PATHS_TO_EXAMPLES = [
 
 const TRANSFORM_CODE_PATHS = [
     './src/routes.tsx',
-    './src/redux/root-reducer.ts',
-    './src/server/mocks/mocks.ts',
-    './src/pages/welcome-page/welcome-page.tsx',
-    './src/types/declarations/client-api-fetcher.d.ts',
-    './src/pages/welcome-page/welcome-page.module.css',
-    './src/utils/alfa-metrics.ts',
+    './src/pages/WelcomePage/WelcomePage.tsx',
     './plopfile.js',
 ];
 
 const REPLACEMENT_FILES = [
     PACKAGE_JSON_PATH,
-    './config/default.ts',
-    './src/pages/welcome-page/welcome-page.tsx',
-    './sonar-project.properties',
+    './src/pages/WelcomePage/WelcomePage.tsx',
 ];
 
 const filePatterns = {
@@ -103,28 +87,6 @@ const createModifyActions = (pattern, template) => {
 
     return actions;
 };
-
-const addAuth = (auth) => {
-    if (!auth) return AUTH_PATHS.map(removeGenerator('replace'));
-    console.log('Добавляю adAuthPlugin. ⏳‍');
-    execSync('yarn add @alfa-bank/ufr-hapi-ad-auth-plugin');
-
-    return [
-        ...AUTH_PATHS.map(trasformGenerator()),
-        {
-            type: 'add',
-            path: './src/server/lib/get-valid-credentials.ts',
-            force: true,
-            templateFile: 'template/get-valid-credentials.hbs',
-        },
-        {
-            type: 'add',
-            path: './src/types/api/ad.ts',
-            force: true,
-            templateFile: 'template/ad.hbs',
-        },
-    ];
-};
 /* endRemoveCode */
 
 module.exports = (plop) => {
@@ -155,13 +117,10 @@ module.exports = (plop) => {
         execSync('yarn');
         execSync('yarn format');
         execSync('yarn lint:fix');
-        execSync('yarn remove date-fns');
 
         console.log('#######################################');
         console.log(
-            `\nУра! Готово 🎉 Репозиторий ${repositoryName} готов к использованию! ✨\n ${
-                auth && 'Не забудь добавить авторизационные моки 👩🏼‍💻\n'
-            }`,
+            `\nУра! Готово 🎉 Репозиторий ${repositoryName} готов к использованию! ✨👩🏼\n`,
         );
     });
 
@@ -185,26 +144,26 @@ module.exports = (plop) => {
             {
                 type: 'input',
                 name: 'projectDescription',
-                message: '1/7 Описание проекта. К примеру, "Стаб Единого Фронта"',
+                message: '1/7 Описание проекта. К примеру, "Казино админ"',
                 validate,
             },
             {
                 type: 'input',
                 name: 'projectName',
-                message: '2/7 Название проекта в гите. У стаба, к примеру, это ufr-sandbox',
+                message: '2/7 Название проекта в гите. У стаба, к примеру, это ui-stub-example',
                 validate,
             },
             {
                 type: 'input',
                 name: 'repositoryName',
-                message: '3/7 Название репозитория. К примеру, ufr-sandbox-example-ui',
+                message: '3/7 Название репозитория. К примеру, ui-stub-example',
                 validate,
             },
             {
                 type: 'input',
                 name: 'jiraLink',
                 message:
-                    '4/7 Ссылка на доску проекта в жире. К примеру, https://jira.moscow.alfaintra.net/projects/UFRSBXUI',
+                    '4/7 Ссылка на доску проекта в жире. К примеру, https://jira/projects/SOME',
                 validate,
             },
             {
@@ -212,36 +171,24 @@ module.exports = (plop) => {
                 name: 'confluenceLink',
                 message: '5/7 Почти закончили... Ссылка на проект в confluence',
                 validate,
-            },
-            {
-                type: 'input',
-                name: 'jenkinsLink',
-                message: '6/7 Ссылка на jenkins. К примеру, https://dojenkins/ufrsandbox/',
-                validate,
-            },
-            {
-                type: 'confirm',
-                name: 'auth',
-                message: '7/7 И последнее: аутентификация в проекте происходит по ad-api?',
-            },
+            }
         ],
         actions: ({ projectName, repositoryName, projectDescription, auth }) => {
             const removeStubCodeActions = createCodeRemoveActions();
             const replaceCodeActions = createCodeReplaceActions();
             const updateRepositoryNameActions = createModifyActions(
-                'ufr-sandbox-example-ui',
+                'ui-stub-example',
                 repositoryName,
             );
-            const updateProjectNameActions = createModifyActions('ufr-sandbox', projectName);
+            const updateProjectNameActions = createModifyActions('ui-stub-example', projectName);
             const updateRepositoryDescriptionActions = createModifyActions(
-                'Стаб Единого Фронта',
+                'Стаб проекта',
                 projectDescription,
             );
 
             console.log('Отлично! Запускаю настройку 🚀');
 
             return [
-                ...addAuth(auth),
                 ...removeStubCodeActions,
                 ...replaceCodeActions,
                 ...updateRepositoryNameActions,
