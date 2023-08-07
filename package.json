@@ -11,13 +11,16 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "lint-css": "stylelint ./src/**/*.css",
     "lint-scripts": "eslint ./ ./src/ ./config/ ./cypress --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "yarn lint-css --fix && yarn lint-scripts --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "check-types": "tsc",
+    "eslint": "eslint --cache --ext .ts . --config .eslintrc.js",
+    "lint": "npm run eslint && npm run check-types",
+    "lint:fix": "eslint --cache --ext .js,.jsx,.ts,.tsx  . --fix --config .eslintrc.cjs",
     "plop": "npx plop",
     "test": "arui-scripts test"
   },
